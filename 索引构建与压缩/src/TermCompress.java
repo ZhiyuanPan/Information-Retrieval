@@ -14,7 +14,7 @@ public class TermCompress {
         String word = new String("");
         int flag = -1;
         for (int i = 0; i < str.length(); i++) {
-            if ((int) str.charAt(i) >= 97 && (int) str.charAt(i) <= 122) {
+            if ((int) str.charAt(i) >= 97 && (int) str.charAt(i) <= 122 || str.charAt(i)=='\'') {
                 word += str.charAt(i);
                 flag = 1;
             } else if (flag == 1 && (str.charAt(i) < 97 || str.charAt(i) > 122)) {
@@ -75,6 +75,47 @@ public class TermCompress {
         }
     }
 
+    static void IfHeapsLaws(int token){
+        double min=30*Math.sqrt(token);
+        System.out.println("当k取30，b取0.5时，根据HEAP'S LAWS估计得term的数目："+min);
+
+        double max=100*Math.sqrt(token);
+        System.out.println("当k取100，b取0.5时，根据HEAP'S LAWS估计得term的数目："+max);
+    }
+
+    static void IfZipfLaws(){
+        int max=0;
+        for(int i=0;i<10;i++){
+            String str=new String();
+            if(i==0){
+                Iterator iter = index.entrySet().iterator();
+                while (iter.hasNext()) {
+                    Map.Entry entry = (Map.Entry) iter.next();
+                    Object val = entry.getValue();
+                    if((int)val>max){
+                        max=(int)val;
+                        str=(String)entry.getKey();
+                    }
+                }
+                System.out.println(max+" "+str);
+            }
+            else{
+                int maxStr=0;
+                Iterator iter = index.entrySet().iterator();
+                while (iter.hasNext()) {
+                    Map.Entry entry = (Map.Entry) iter.next();
+                    Object val = entry.getValue();
+                    if((int)val<max && (int)val>maxStr){
+                        maxStr=(int)val;
+                        str=(String)entry.getKey();
+                    }
+                }
+                max=maxStr;
+                System.out.println(max+" "+str);
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
         getStopWord();
@@ -83,14 +124,21 @@ public class TermCompress {
 
         Iterator iter = index.entrySet().iterator();
 
-        int i = 0;
+        int i = 0, j=0;
         while (iter.hasNext()) {
             i++;
             Map.Entry entry = (Map.Entry) iter.next();
             Object key = entry.getKey();
             Object val = entry.getValue();
+            j=j+(int)val;
             System.out.println(key + "," + val);
         }
-        System.out.println(i);
+        System.out.println("得到的token个数是："+j);
+        System.out.println("得到的term个数是："+i);
+
+
+        IfHeapsLaws(j);
+
+        IfZipfLaws();
     }
 }
