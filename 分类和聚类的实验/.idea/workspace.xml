@@ -20,13 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b2886da-5268-43f0-a529-70c6a2436a8e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/分类和聚类的实验.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/huaban/analysis/jieba/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/huaban/analysis/jieba/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,6 +133,7 @@
       <updated>1590762130523</updated>
       <workItem from="1590762136319" duration="27000" />
       <workItem from="1590762200509" duration="8267000" />
+      <workItem from="1590770671112" duration="7194000" />
     </task>
     <servers />
   </component>
@@ -154,28 +150,29 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="617" y="225" key="FileChooserDialogImpl" timestamp="1590762162763">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
     <state x="617" y="225" key="FileChooserDialogImpl/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590762162763" />
-    <state width="790" height="412" key="GridCell.Tab.0.bottom" timestamp="1590770592732">
+    <state width="791" height="440" key="GridCell.Tab.0.bottom" timestamp="1590777871981">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
-    <state width="790" height="412" key="GridCell.Tab.0.bottom/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590770592732" />
-    <state width="790" height="412" key="GridCell.Tab.0.center" timestamp="1590770592732">
+    <state width="791" height="440" key="GridCell.Tab.0.bottom/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590777871981" />
+    <state width="791" height="440" key="GridCell.Tab.0.center" timestamp="1590777871980">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
-    <state width="790" height="412" key="GridCell.Tab.0.center/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590770592732" />
-    <state width="790" height="412" key="GridCell.Tab.0.left" timestamp="1590770592732">
+    <state width="791" height="440" key="GridCell.Tab.0.center/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590777871980" />
+    <state width="791" height="440" key="GridCell.Tab.0.left" timestamp="1590777871980">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
-    <state width="790" height="412" key="GridCell.Tab.0.left/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590770592732" />
-    <state width="790" height="412" key="GridCell.Tab.0.right" timestamp="1590770592732">
+    <state width="791" height="440" key="GridCell.Tab.0.left/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590777871980" />
+    <state width="791" height="440" key="GridCell.Tab.0.right" timestamp="1590777871980">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
-    <state width="790" height="412" key="GridCell.Tab.0.right/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590770592732" />
+    <state width="791" height="440" key="GridCell.Tab.0.right/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590777871980" />
     <state x="645" y="248" key="chooseDestDirectoryDialog" timestamp="1590762311105">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
