@@ -1,22 +1,12 @@
 package com.huaban.analysis.jieba;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
 
-import junit.framework.TestCase;
-import org.apache.commons.lang3.ObjectUtils;
-import org.junit.Test;
-import com.huaban.analysis.jieba.JiebaSegmenter.SegMode;
-
-import static java.lang.Double.NaN;
-import static java.lang.Double.isNaN;
-
-public class main {
+public class X2_based {
     static public JiebaSegmenter segmenter = new JiebaSegmenter();
     static public HashMap<String, Double> Computerwords = new HashMap<String, Double>();
     static public HashMap<String, Double> Internationwords = new HashMap<String, Double>();
@@ -44,9 +34,13 @@ public class main {
     public static void main(String[] args) {
         BulidSet();
         ClassComputer();
+        System.out.println();
         ClassIntenation();
+        System.out.println();
         ClassStudent();
+        System.out.println();
         ClassTeaching();
+        System.out.println();
         ClassScience();
     }
 
@@ -97,11 +91,8 @@ public class main {
                 }
             }
             double N11 = N1, N01 = 30 - N1, N10 = N2 + N3 + N4 + N5, N00 = 120 - (N2 + N3 + N4 + N5);
-            double I = N11 / N * Log2(N * N11 / ((N11 + N10) * (N11 + N01)))
-                    + N01 / N * Log2(N * N01 / ((N01 + N00) * (N11 + N01)))
-                    + N10 / N * Log2(N * N10 / ((N11 + N10) * (N10 + N00)))
-                    + N00 / N * Log2(N * N00 / ((N01 + N00) * (N10 + N00)));
-            Computerwords.put(str, I);
+            double X2 = (N11+N10+N01+N00)*(N11*N00-N10*N01)*(N11*N00-N10*N01)/((N11+N01)*(N11+N10)*(N10+N00)*(N01+N00));
+            Computerwords.put(str, X2);
         }
 
         record[] a = new record[15];
@@ -167,11 +158,8 @@ public class main {
                 }
             }
             double N11 = N1, N01 = 30 - N1, N10 = N2 + N3 + N4 + N5, N00 = 120 - (N2 + N3 + N4 + N5);
-            double I = N11 / N * Log2(N * N11 / ((N11 + N10) * (N11 + N01)))
-                    + N01 / N * Log2(N * N01 / ((N01 + N00) * (N11 + N01)))
-                    + N10 / N * Log2(N * N10 / ((N11 + N10) * (N10 + N00)))
-                    + N00 / N * Log2(N * N00 / ((N01 + N00) * (N10 + N00)));
-            Internationwords.put(str, I);
+            double X2 = (N11+N10+N01+N00)*(N11*N00-N10*N01)*(N11*N00-N10*N01)/((N11+N01)*(N11+N10)*(N10+N00)*(N01+N00));
+            Internationwords.put(str, X2);
         }
 
         record[] a = new record[15];
@@ -237,11 +225,8 @@ public class main {
                 }
             }
             double N11 = N1, N01 = 30 - N1, N10 = N2 + N3 + N4 + N5, N00 = 120 - (N2 + N3 + N4 + N5);
-            double I = N11 / N * Log2(N * N11 / ((N11 + N10) * (N11 + N01)))
-                    + N01 / N * Log2(N * N01 / ((N01 + N00) * (N11 + N01)))
-                    + N10 / N * Log2(N * N10 / ((N11 + N10) * (N10 + N00)))
-                    + N00 / N * Log2(N * N00 / ((N01 + N00) * (N10 + N00)));
-            Studentwords.put(str, I);
+            double X2 = (N11+N10+N01+N00)*(N11*N00-N10*N01)*(N11*N00-N10*N01)/((N11+N01)*(N11+N10)*(N10+N00)*(N01+N00));
+            Studentwords.put(str, X2);
         }
 
         record[] a = new record[15];
@@ -307,11 +292,8 @@ public class main {
                 }
             }
             double N11 = N1, N01 = 30 - N1, N10 = N2 + N3 + N4 + N5, N00 = 120 - (N2 + N3 + N4 + N5);
-            double I = N11 / N * Log2(N * N11 / ((N11 + N10) * (N11 + N01)))
-                    + N01 / N * Log2(N * N01 / ((N01 + N00) * (N11 + N01)))
-                    + N10 / N * Log2(N * N10 / ((N11 + N10) * (N10 + N00)))
-                    + N00 / N * Log2(N * N00 / ((N01 + N00) * (N10 + N00)));
-            Teachingwords.put(str, I);
+            double X2 = (N11+N10+N01+N00)*(N11*N00-N10*N01)*(N11*N00-N10*N01)/((N11+N01)*(N11+N10)*(N10+N00)*(N01+N00));
+            Teachingwords.put(str, X2);
         }
 
         record[] a = new record[15];
@@ -377,11 +359,8 @@ public class main {
                 }
             }
             double N11 = N1, N01 = 30 - N1, N10 = N2 + N3 + N4 + N5, N00 = 120 - (N2 + N3 + N4 + N5);
-            double I = N11 / N * Log2(N * N11 / ((N11 + N10) * (N11 + N01)))
-                    + N01 / N * Log2(N * N01 / ((N01 + N00) * (N11 + N01)))
-                    + N10 / N * Log2(N * N10 / ((N11 + N10) * (N10 + N00)))
-                    + N00 / N * Log2(N * N00 / ((N01 + N00) * (N10 + N00)));
-            Sciencewords.put(str, I);
+            double X2 = (N11+N10+N01+N00)*(N11*N00-N10*N01)*(N11*N00-N10*N01)/((N11+N01)*(N11+N10)*(N10+N00)*(N01+N00));
+            Sciencewords.put(str, X2);
         }
 
         record[] a = new record[15];
