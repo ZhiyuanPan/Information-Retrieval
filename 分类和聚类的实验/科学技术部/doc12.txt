@@ -1,0 +1,3 @@
+近日，深圳大学化学与环境工程学院何传新课题组在能源催化方面取得重要进展，研究成果以“High-Performance Overall CO2 Splitting on Hierarchical Structured Cobalt Disulfide with Partially Removed Sulfur Edges”为题发表在化学材料领域顶级杂志《Advanced Functional Materials》 (JCR一区，影响因子15.621)。课题组硕士生韩振和胡琪博士是论文的共同第一作者，深圳大学何传新教授为通讯作者，深圳大学为唯一通讯单位。
+
+在该项工作中，以氢氧化钴纳米片阵列作为模板合成了具有多级结构的二硫化钴（CoS2）纳米笼（如二维CoS2纳米片阵列上的三维空心CoS2纳米笼网络）作为高效的二氧化碳全反应催化剂。研究发现，通过温度控制可以部分移除边缘硫结构，从而抑制析氢副反应（HER）。DFT计算表明，CoS2的平面硫具有高CO2RR活性但是低HER活性，是理想的CO2RR活性位点。令人印象深刻的是，该多级纳米笼可以同时作为阴极和阳极催化剂用于CO2电催化全反应，在接近中性的电解质中，电压为1.92 V时达到1 mA cm-2的电流密度，优于目前文献报道的双功能电催化剂。

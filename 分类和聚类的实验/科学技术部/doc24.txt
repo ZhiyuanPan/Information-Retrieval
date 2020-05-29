@@ -1,0 +1,9 @@
+近日，深圳大学医学部何前军教授带领的“先进纳米药物课题组”在国际顶级期刊《Science Advances》上发表了一篇题为"A Multistage Assembly/Disassembly Strategy for Tumor-Targeted CO Delivery"的研究论文。Science Advances为中科院大类一区、TOP期刊。医学部研究生孟晋、金召奎副研究员为论文的共同第一作者，何前军教授为唯一通讯作者。该论文研发了一种一氧化碳（CO）毒气弹，靶向肿瘤细胞线粒体原位释放CO毒气，实现了肿瘤细胞的精准、高效杀伤。
+
+CO气体分子抗癌的主要作用靶点是肿瘤细胞的线粒体（也称为“能量工厂”），然而CO在体内任意扩散，缺乏肿瘤组织蓄积能力。本研究首次提出了“多级分步靶向气体传输”的概念，通过程序化组装策略构建新型靶向纳米气体药物，利用解组装策略实现肿瘤组织−细胞−线粒体的多级分步靶向药物传输、以及多级分步可控CO前药释放和CO气体释放，最终实现肿瘤线粒体靶向CO高效递送（即：全程制导CO毒气弹精准打击肿瘤要害）。
+
+
+
+该研究对气体医学的临床转化有着积极意义，相关工作发表在著名期刊《科学∙进展》，详见：A Multistage Assembly/Disassembly Strategy for Tumor-Targeted CO Delivery, Science Advances, 2020, 6, eaba1362.
+
+	论文链接：https://doi.org/10.1126/sciadv.aba1362
