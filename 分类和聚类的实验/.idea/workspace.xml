@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2b2886da-5268-43f0-a529-70c6a2436a8e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/huaban/analysis/jieba/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/huaban/analysis/jieba/MI_based.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/huaban/analysis/jieba/MI_based.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/huaban/analysis/jieba/MI_based.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/huaban/analysis/jieba/X2_based.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/huaban/analysis/jieba/X2_based.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +56,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
-  <component name="RunManager" selected="Application.X2_based">
+  <component name="RunManager" selected="Application.MI_based">
     <configuration name="MI_based" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.huaban.analysis.jieba.MI_based" />
       <module name="分类和聚类的实验" />
@@ -128,8 +129,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.X2_based" />
         <item itemvalue="Application.MI_based" />
+        <item itemvalue="Application.X2_based" />
         <item itemvalue="Application.test" />
         <item itemvalue="JUnit.JiebaSegmenterTest" />
         <item itemvalue="JUnit.JiebaSegmenterTest.testLongTextSegmentSpeed" />
@@ -150,6 +151,9 @@
       <workItem from="1590762200509" duration="8267000" />
       <workItem from="1590770671112" duration="7194000" />
       <workItem from="1590778305249" duration="816000" />
+      <workItem from="1590808683270" duration="54000" />
+      <workItem from="1590812272567" duration="1845000" />
+      <workItem from="1590814133227" duration="1483000" />
     </task>
     <servers />
   </component>
@@ -177,26 +181,30 @@
       <screen x="0" y="0" width="1676" height="943" />
     </state>
     <state x="617" y="225" key="FileChooserDialogImpl/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590762162763" />
-    <state width="792" height="440" key="GridCell.Tab.0.bottom" timestamp="1590779121926">
+    <state width="795" height="443" key="GridCell.Tab.0.bottom" timestamp="1590815617049">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
-    <state width="792" height="440" key="GridCell.Tab.0.bottom/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590779121926" />
-    <state width="792" height="440" key="GridCell.Tab.0.center" timestamp="1590779121926">
+    <state width="795" height="443" key="GridCell.Tab.0.bottom/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590815617049" />
+    <state width="795" height="443" key="GridCell.Tab.0.center" timestamp="1590815617049">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
-    <state width="792" height="440" key="GridCell.Tab.0.center/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590779121926" />
-    <state width="792" height="440" key="GridCell.Tab.0.left" timestamp="1590779121926">
+    <state width="795" height="443" key="GridCell.Tab.0.center/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590815617049" />
+    <state width="795" height="443" key="GridCell.Tab.0.left" timestamp="1590815617049">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
-    <state width="792" height="440" key="GridCell.Tab.0.left/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590779121926" />
-    <state width="792" height="440" key="GridCell.Tab.0.right" timestamp="1590779121926">
+    <state width="795" height="443" key="GridCell.Tab.0.left/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590815617049" />
+    <state width="795" height="443" key="GridCell.Tab.0.right" timestamp="1590815617049">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
-    <state width="792" height="440" key="GridCell.Tab.0.right/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590779121926" />
+    <state width="795" height="443" key="GridCell.Tab.0.right/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590815617049" />
     <state x="645" y="248" key="chooseDestDirectoryDialog" timestamp="1590762311105">
       <screen x="0" y="0" width="1676" height="943" />
     </state>
     <state x="645" y="248" key="chooseDestDirectoryDialog/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590762311105" />
+    <state x="-7" y="0" width="852" height="950" key="dock-window-1" timestamp="1590814813129">
+      <screen x="0" y="0" width="1676" height="943" />
+    </state>
+    <state x="-7" y="0" width="852" height="950" key="dock-window-1/-1920.0.1676.943/0.0.1676.943@0.0.1676.943" timestamp="1590814813129" />
     <state x="913" y="223" key="run.anything.popup" timestamp="1590769475449">
       <screen x="0" y="0" width="1676" height="943" />
     </state>

@@ -43,21 +43,36 @@ public class MI_based {
 
     public static void main(String[] args) {
         BulidSet();
-        ClassComputer();
-        ClassIntenation();
-        ClassStudent();
-        ClassTeaching();
-        ClassScience();
+        System.out.println("计算机与软件学院:");
+        ClassComputer();//对计算机与软件学院类别进行计算输出
+        System.out.println();
+
+        System.out.println("国际交流与合作部:");
+        ClassIntenation();//对国际交流与合作部类别进行计算输出
+        System.out.println();
+
+        System.out.println("学生部:");
+        ClassStudent();//对学生部类别进行计算输出
+        System.out.println();
+
+        System.out.println("教务部:");
+        ClassTeaching();//对教务部类别进行计算输出
+        System.out.println();
+
+        System.out.println("科学技术部:");
+        ClassScience();//对科学技术部类别进行计算输出
     }
 
-    static double Log2(double a) {
-        return Math.log(a) / Math.log(2);
+    static double Log2(double a) {//计算Log2(n)
+        return Math.log(a) / Math.log(2);//使用数学中的换底公式
     }
 
     static void ClassComputer() {
         double N1 = 0, N2 = 0, N3 = 0, N4 = 0, N5 = 0, N = 150;
-        HashSet<String> ALLComputer = new HashSet<>();
-        for (int i = 1; i <= 30; i++) {
+        //首先定义N1-5，分别表示词条在计算机与软件学院、国际交流与合作部、学生部、科学技术部与教务部中
+        // 文档中出现的次数，N则为文档数量的总数
+        HashSet<String> ALLComputer = new HashSet<>();//定义ALLComputer为计算机与软件类别中的所有词条
+        for (int i = 1; i <= 30; i++) {//对计算机与软件学院所有词条取集合
             for (String str : Computer[i]) {
                 if (!ALLComputer.contains(str)) {
                     ALLComputer.add(str);
@@ -70,43 +85,46 @@ public class MI_based {
             N3 = 0;
             N4 = 0;
             N5 = 0;
-            N = 150;
-            for (int i = 1; i <= 30; i++) {
-                if (Computer[i].contains(str)) {
+            N = 150;//将变量N1-5以及N重新初始化
+            for (int i = 1; i <= 30; i++) {//对当前类别中的30个文档遍历
+                if (Computer[i].contains(str)) {//如果当前词条在目前类别的文档中出现过，则N1+1
                     N1++;
                 }
             }
             for (int i = 1; i <= 30; i++) {
-                if (Internation[i].contains(str)) {
+                if (Internation[i].contains(str)) {//当前词条在国际交流与合作部的文档出现过，N2+1
                     N2++;
                 }
             }
             for (int i = 1; i <= 30; i++) {
-                if (Student[i].contains(str)) {
+                if (Student[i].contains(str)) {//当前词条在学生部的文档出现过，N3+1
                     N3++;
                 }
             }
             for (int i = 1; i <= 30; i++) {
-                if (Science[i].contains(str)) {
+                if (Science[i].contains(str)) {//当前词条在科学技术部的文档出现过，N4+1
                     N4++;
                 }
             }
             for (int i = 1; i <= 30; i++) {
-                if (Teaching[i].contains(str)) {
+                if (Teaching[i].contains(str)) {//当前词条在教务部的文档出现过，N5+1
                     N5++;
                 }
             }
             double N11 = N1, N01 = 30 - N1, N10 = N2 + N3 + N4 + N5, N00 = 120 - (N2 + N3 + N4 + N5);
+            //n11---当前类别中含有该词条的文档的数量  n10---非当前类别中含有该词条的文档的数量
+            //n01---当前类别中不含有该词条的文档的数量  n10---非当前类别中不含有该词条的文档的数量
             double I = N11 / N * Log2(N * N11 / ((N11 + N10) * (N11 + N01)))
                     + N01 / N * Log2(N * N01 / ((N01 + N00) * (N11 + N01)))
                     + N10 / N * Log2(N * N10 / ((N11 + N10) * (N10 + N00)))
                     + N00 / N * Log2(N * N00 / ((N01 + N00) * (N10 + N00)));
+            //计算I的公式在报告中列出
             Computerwords.put(str, I);
+            //将上述结果放入基于HASHMAP的记录表中
         }
-
         record[] a = new record[15];
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 15; i++) {//取记录表中I最大的15个值存入结果数组中
             double max = 0;
             String maxword = "";
             for (String word : ALLComputer) {
@@ -116,11 +134,11 @@ public class MI_based {
                     maxword = word;
                 }
             }
-            record b = new record(maxword, max);
+            record b = new record(maxword, max);//结果数组每一个元素为自定义的String-double类
             a[i] = b;
         }
-        for (int i = 0; i < 15; i++) {
-            System.out.println(a[i].word + " " + a[i].f);
+        for (int i = 0; i < 15; i++) {//输出最终结果
+            System.out.println(a[i].word + " " + String.format("%.2f", a[i].f));
         }
     }
 
@@ -189,8 +207,8 @@ public class MI_based {
             record b = new record(maxword, max);
             a[i] = b;
         }
-        for (int i = 0; i < 15; i++) {
-            System.out.println(a[i].word + " " + a[i].f);
+        for (int i = 0; i < 15; i++) {//输出最终结果
+            System.out.println(a[i].word + " " + String.format("%.2f", a[i].f));
         }
     }
 
@@ -259,8 +277,8 @@ public class MI_based {
             record b = new record(maxword, max);
             a[i] = b;
         }
-        for (int i = 0; i < 15; i++) {
-            System.out.println(a[i].word + " " + a[i].f);
+        for (int i = 0; i < 15; i++) {//输出最终结果
+            System.out.println(a[i].word + " " + String.format("%.2f", a[i].f));
         }
     }
 
@@ -329,8 +347,8 @@ public class MI_based {
             record b = new record(maxword, max);
             a[i] = b;
         }
-        for (int i = 0; i < 15; i++) {
-            System.out.println(a[i].word + " " + a[i].f);
+        for (int i = 0; i < 15; i++) {//输出最终结果
+            System.out.println(a[i].word + " " + String.format("%.2f", a[i].f));
         }
     }
 
@@ -399,15 +417,17 @@ public class MI_based {
             record b = new record(maxword, max);
             a[i] = b;
         }
-        for (int i = 0; i < 15; i++) {
-            System.out.println(a[i].word + " " + a[i].f);
+        for (int i = 0; i < 15; i++) {//输出最终结果
+            System.out.println(a[i].word + " " + String.format("%.2f", a[i].f));
         }
     }
 
-    static void BulidSet() {
+    static void BulidSet() {//为每一个类别中的每一个文档进行分词取集合
         for (int i = 1; i <= 30; i++) {
-            Computer[i] = new HashSet<>();
+            Computer[i] = new HashSet<>();//为计算机与软件学院类别建立hashset
+            //类别所在路径
             String computer = "C:\\Users\\49141\\Desktop\\IR\\Information-Retrieval\\分类和聚类的实验\\计算机与软件学院\\doc";
+            //文档所在路径
             computer += i + ".txt";
             try {
                 FileReader f = new FileReader(computer);    //使用filereader指定文件
@@ -419,11 +439,11 @@ public class MI_based {
                     str = str.replaceAll("[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&amp;*（）——+|{}【】‘；：”“’。，、？|-]", "");
                     String[] database = str.split("\\s+");//split方法返回的数组存入自定义string数组中
                     for (String term : database) {
-                        if (term.equals("")) {
+                        if (term.equals("")) {//去除结巴分词得到的错误的空字符串""
                             continue;
                         }
-                        if (!Computer[i].contains(term)) {
-                            Computer[i].add(term);
+                        if (!Computer[i].contains(term)) {//如果集合内无当前得到的词
+                            Computer[i].add(term);//将新词加入到集合中
                         }
                     }
                 }
