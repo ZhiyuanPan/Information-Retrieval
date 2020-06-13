@@ -12,6 +12,7 @@ public class GlobalDocumentSearch {
     public HashMap<Integer, LinkedList<Double>> Doc_TFIDF = new HashMap<>();
     public HashMap<Integer, Double> VectorLength = new HashMap<>();
     public LinkedList<String> InputString_terms = new LinkedList<>();
+    public HashMap<Integer, Double> result = new HashMap<>();
     public int DocumentSize;
 
     public void HashMapConstruct(HashMap<Integer, Case> C) {
@@ -24,7 +25,30 @@ public class GlobalDocumentSearch {
 
     public void GlobalSearch(String input) {
         StringAdd(input);
-        System.out.println(cosine_similarity(0));
+        for (int i = 1; i < DocumentSize; i++) {
+            result.put(i, cosine_similarity(i));
+        }
+        for (int i = 0; i < 10; i++) {
+            double max = 0;
+            int flag = 0;
+            for (int j = 1; j < DocumentSize; j++) {
+                if (max < result.get(j)) {
+                    max = result.get(j);
+                    flag = j;
+                }
+            }
+            result.put(flag, (double) 0);
+            if (max == 0) {
+                return;
+            }
+            System.out.println("结果" + i+1 + "：  " );
+            System.out.println("   犯罪事实："+CaseMap.get(flag).fact);
+            System.out.println("   相关法律条文："+CaseMap.get(flag).relevant_articles+"   罪名："+CaseMap.get(flag).accusation
+                    +"   罚金："+CaseMap.get(flag).punish_of_money+"   罪犯："+CaseMap.get(flag).criminals);
+            System.out.println("   死刑："+CaseMap.get(flag).death_penalty+"   监禁："+CaseMap.get(flag).imprisonment
+                    +"   终身监禁："+CaseMap.get(flag).life_imprisonment);
+            System.out.println();
+        }
     }
 
     public double cosine_similarity(int DocID) {
@@ -34,13 +58,16 @@ public class GlobalDocumentSearch {
                 t.add(InputString_terms.get(i));
             }
         }
+        if (t.isEmpty()) {
+            return 0;
+        }
         double cos = 0;
         for (int i = 0; i < t.size(); i++) {
             cos += TF_IDF(0, t.get(i)) * TF_IDF(DocID, t.get(i));
         }
-        double CosValue=cos / (VectorLength.get(0) * VectorLength.get(DocID));
-        if(CosValue>1){
-            CosValue=1;
+        double CosValue = cos / (VectorLength.get(0) * VectorLength.get(DocID));
+        if (CosValue > 1) {
+            CosValue = 1;
         }
         return CosValue;
     }

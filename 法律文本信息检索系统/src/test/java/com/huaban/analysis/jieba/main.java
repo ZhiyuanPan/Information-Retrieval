@@ -14,7 +14,7 @@ public class main {
         GlobalDocumentSearch GlobalSearch=new GlobalDocumentSearch();
         GlobalSearch.HashMapConstruct(CaseMap);
         Scanner in=new Scanner(System.in);
-        System.out.println("请输入：");
+        System.out.print("请输入：");
         String input=in.nextLine();
         GlobalSearch.GlobalSearch(input);
     }
