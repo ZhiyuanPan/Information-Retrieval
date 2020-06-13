@@ -25,7 +25,12 @@ public class main {
     public static void main(String[] args) throws IOException {
         JsonReader Json=new JsonReader();
         CaseMap=Json.ReadJson();
-        Accusation_statistics acc=new Accusation_statistics();
-        acc.Statistics(CaseMap,Json.getAccusation_Set());
+//        Accusation_statistics acc=new Accusation_statistics();
+//        acc.Statistics(CaseMap,Json.getAccusation_Set());
+        Scanner in=new Scanner(System.in);
+        System.out.println("请输入：");
+        String str=in.nextLine();
+        GlobalDocumentSearch GlobalSearch=new GlobalDocumentSearch();
+        GlobalSearch.GlobalSearch(str,CaseMap);
     }
 }

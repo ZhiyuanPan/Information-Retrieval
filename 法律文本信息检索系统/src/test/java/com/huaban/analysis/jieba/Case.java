@@ -60,4 +60,10 @@ public class Case {
     public boolean getLife_imprisonment() {
         return life_imprisonment;
     }
+
+    public String toString(){
+        String str=fact+" "+relevant_articles+" "+accusation+" "+punish_of_money+" "+criminals
+                +" "+death_penalty+" "+imprisonment+" "+life_imprisonment;
+        return str;
+    }
 }

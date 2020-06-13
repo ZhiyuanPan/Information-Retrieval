@@ -11,15 +11,18 @@ public class Accusation_statistics {
     public JiebaSegmenter segmenter = new JiebaSegmenter();
     public HashMap<String, String[]> Accusation_data = new HashMap<>();
     public HashMap<String, Integer> Accusation_number = new HashMap<>();
-
+    public int NumberOFToken=0;
+    public int NumberOFTerm=0;
     public void Statistics(HashMap<Integer, Case> CaseMap, HashSet<String> AccusationSet) {
         HashMap<String, HashSet<String>> Accusation = new HashMap<>();
         for (int i = 1; i <= CaseMap.size(); i++) {
             if (!Accusation.containsKey(CaseMap.get(i).accusation)) {
+                NumberOFTerm++;NumberOFToken++;
                 HashSet<String> Set = new HashSet<>();
                 Set.add(CaseMap.get(i).fact);
                 Accusation.put(CaseMap.get(i).accusation, Set);
             } else {
+                NumberOFToken++;
                 Accusation.get(CaseMap.get(i).accusation).add(CaseMap.get(i).fact);
             }
         }
@@ -71,6 +74,7 @@ public class Accusation_statistics {
     public void print(HashSet<String> AccusationSet) {
         for (String accusation : AccusationSet) {
             System.out.println("罪名：" + accusation + "       文档个数：" +Accusation_number.get(accusation));
+            System.out.println("token数量："+NumberOFToken+"   term数量："+NumberOFTerm);
             System.out.print("Top10高频词汇：");
             String[] f=Accusation_data.get(accusation);
             for (int i = 0; i <10 ; i++) {
