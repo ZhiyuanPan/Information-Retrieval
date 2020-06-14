@@ -72,6 +72,7 @@ public class Accusation_statistics {
     }
 
     public void print(HashSet<String> AccusationSet) {
+        System.out.println("以下为对不同“罪名”的犯罪事实部分的内容统计：");
         for (String accusation : AccusationSet) {
             System.out.println("罪名：" + accusation + "       文档个数：" +Accusation_number.get(accusation));
             System.out.println("token数量："+NumberOFToken+"   term数量："+NumberOFTerm);

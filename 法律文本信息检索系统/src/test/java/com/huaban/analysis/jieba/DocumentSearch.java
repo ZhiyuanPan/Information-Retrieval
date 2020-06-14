@@ -2,28 +2,50 @@ package com.huaban.analysis.jieba;
 
 import java.util.*;
 
-public class GlobalDocumentSearch {
+public class DocumentSearch {
+    public boolean ifGlobalSearch = false;
+    public boolean ifFactsSearch = false;
+    public boolean ifAccusaationslSearch = false;
     public JiebaSegmenter segmenter = new JiebaSegmenter();
     public HashMap<Integer, Case> CaseMap = new HashMap<>();
     public HashMap<Integer, String> CaseList = new HashMap<>();
     public HashMap<String, Integer> WordFrequencyInAll = new HashMap<>();
+    public HashMap<String, Integer> WordFrequencyInAll_Reset = new HashMap<>();
     public HashMap<Integer, HashMap<String, Integer>> TF_td = new HashMap<>();
+    public HashMap<Integer, HashMap<String, Integer>> TF_td_Reset = new HashMap<>();
     public HashMap<String, HashSet<Integer>> DF_t = new HashMap<>();
-    public HashMap<Integer, LinkedList<Double>> Doc_TFIDF = new HashMap<>();
+    public HashMap<String, HashSet<Integer>> DF_t_Reset = new HashMap<>();
     public HashMap<Integer, Double> VectorLength = new HashMap<>();
     public LinkedList<String> InputString_terms = new LinkedList<>();
     public HashMap<Integer, Double> result = new HashMap<>();
     public int DocumentSize;
 
+    public void System_Reset() {
+        ifGlobalSearch = false;
+        ifFactsSearch = false;
+        ifAccusaationslSearch = false;
+        WordFrequencyInAll = WordFrequencyInAll_Reset;
+        TF_td = TF_td_Reset;
+        DF_t = DF_t_Reset;
+        InputString_terms.clear();
+    }
+
     public void HashMapConstruct(HashMap<Integer, Case> C) {
         CaseMap = C;
         DocumentSize = C.size();
-        getDocument();
+        if (ifGlobalSearch) {
+            getDocuments();
+        } else if (ifFactsSearch) {
+            getFacts();
+        } else if (ifAccusaationslSearch) {
+            getAccusations();
+        }
+        getDocuments();
         Construct();
         LengthCaculator();
     }
 
-    public void GlobalSearch(String input) {
+    public void Search(String input) {
         StringAdd(input);
         for (int i = 1; i < DocumentSize; i++) {
             result.put(i, cosine_similarity(i));
@@ -39,16 +61,41 @@ public class GlobalDocumentSearch {
             }
             result.put(flag, (double) 0);
             if (max == 0) {
+                System.out.println();
+                System.out.println("----------以上为所有搜索结果----------");
                 return;
             }
-            System.out.println("结果" + i+1 + "：  " );
-            System.out.println("   犯罪事实："+CaseMap.get(flag).fact);
-            System.out.println("   相关法律条文："+CaseMap.get(flag).relevant_articles+"   罪名："+CaseMap.get(flag).accusation
-                    +"   罚金："+CaseMap.get(flag).punish_of_money+"   罪犯："+CaseMap.get(flag).criminals);
-            System.out.println("   死刑："+CaseMap.get(flag).death_penalty+"   监禁："+CaseMap.get(flag).imprisonment
-                    +"   终身监禁："+CaseMap.get(flag).life_imprisonment);
-            System.out.println();
+            if (ifGlobalSearch) {
+                GlobalPrint(i, flag);
+            } else if (ifFactsSearch) {
+                FactsPrint(i, flag);
+            } else if (ifAccusaationslSearch) {
+                AccusationPrint(i, flag);
+            }
         }
+        System_Reset();
+    }
+
+    public void GlobalPrint(int i, int flag) {
+        System.out.println("结果" + (i + 1) + "： 第" + flag + "号文档");
+        System.out.println("   犯罪事实：" + CaseMap.get(flag).fact);
+        System.out.println("   相关法律条文：" + CaseMap.get(flag).relevant_articles + "   罪名：" + CaseMap.get(flag).accusation
+                + "   罚金：" + CaseMap.get(flag).punish_of_money + "   罪犯：" + CaseMap.get(flag).criminals);
+        System.out.println("   死刑：" + CaseMap.get(flag).death_penalty + "   监禁：" + CaseMap.get(flag).imprisonment
+                + "   终身监禁：" + CaseMap.get(flag).life_imprisonment);
+        System.out.println();
+    }
+
+    public void FactsPrint(int i, int flag) {
+        System.out.println("结果" + (i + 1) + "： 第" + flag + "号文档");
+        System.out.println("   犯罪事实：" + CaseMap.get(flag).fact);
+        System.out.println();
+    }
+
+    public void AccusationPrint(int i, int flag) {
+        System.out.println("结果" + (i + 1) + "： 第" + flag + "号文档");
+        System.out.println("   罪名：" + CaseMap.get(flag).accusation);
+        System.out.println();
     }
 
     public double cosine_similarity(int DocID) {
@@ -162,6 +209,10 @@ public class GlobalDocumentSearch {
                 }
             }
         }
+
+        WordFrequencyInAll_Reset = WordFrequencyInAll;
+        TF_td_Reset = TF_td;
+        DF_t_Reset = DF_t;
     }
 
     public String[] StrProcess(String S) {
@@ -173,9 +224,21 @@ public class GlobalDocumentSearch {
         return database;
     }
 
-    public void getDocument() {
+    public void getDocuments() {
         for (int i = 1; i <= DocumentSize; i++) {
             CaseList.put(i, CaseMap.get(i).toString());
+        }
+    }
+
+    public void getFacts() {
+        for (int i = 1; i <= DocumentSize; i++) {
+            CaseList.put(i, CaseMap.get(i).fact);
+        }
+    }
+
+    public void getAccusations() {
+        for (int i = 1; i <= DocumentSize; i++) {
+            CaseList.put(i, CaseMap.get(i).accusation);
         }
     }
 }
