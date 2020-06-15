@@ -8,7 +8,6 @@ public class main {
     static JsonReader Json = new JsonReader();
 
     public static void main(String[] args) throws IOException {
-        System.out.println("----------系统数据初始化中...----------");
         System_Data_Initialize();
 
         while (true) {
@@ -47,40 +46,62 @@ public class main {
 
     static public void Search_System() {
         DocumentSearch Search = new DocumentSearch();
-        Search.HashMapConstruct(CaseMap);
         while (true) {
             System.out.println("----------------------------------------------------------");
             System.out.println("   1.全局搜索");
             System.out.println("   2.犯罪事实搜索");
             System.out.println("   3.罪名搜索");
             System.out.println("   0.返回上一级菜单");
-
             System.out.print("请选择所需要使用的搜索方式：");
             Scanner function = new Scanner(System.in);
-            int c = function.nextInt();
-            if (c == 0) {
+            String c = function.nextLine();
+            if (c.equals("0")) {
                 return;
-            } else if (c == 1) {
+            } else if (c.equals("1")) {
+                System.out.println("----------数据初始化中----------");
                 Search.ifGlobalSearch = true;
-                Scanner in = new Scanner(System.in);
-                System.out.print("请输入：");
-                String input = in.nextLine();
-                Search.Search(input);
-                Search.System_Reset();
-            } else if (c == 2) {
+                Search.HashMapConstruct(CaseMap);
+                while (true) {
+                    Scanner in = new Scanner(System.in);
+                    System.out.print("请输入 (输入quit退出)：");
+                    String input = in.nextLine();
+                    if (input.equals("quit")) {
+                        break;
+                    }
+                    Search.Search(input);
+                    Search.System_Reset();
+                }
+            } else if (c.equals("2")) {
+                System.out.println("----------数据初始化中----------");
                 Search.ifFactsSearch = true;
-                Scanner in = new Scanner(System.in);
-                System.out.print("请输入：");
-                String input = in.nextLine();
-                Search.Search(input);
-                Search.System_Reset();
-            } else if (c == 3) {
+                Search.HashMapConstruct(CaseMap);
+                while (true) {
+                    Scanner in = new Scanner(System.in);
+                    System.out.print("请输入 (输入quit退出)：");
+                    String input = in.nextLine();
+                    if (input.equals("quit")) {
+                        break;
+                    }
+                    Search.Search(input);
+                    Search.System_Reset();
+                }
+            } else if (c.equals("3")) {
+                System.out.println("----------数据初始化中----------");
                 Search.ifAccusaationslSearch = true;
-                Scanner in = new Scanner(System.in);
-                System.out.print("请输入：");
-                String input = in.nextLine();
-                Search.Search(input);
-                Search.System_Reset();
+                Search.HashMapConstruct(CaseMap);
+                while (true) {
+                    Scanner in = new Scanner(System.in);
+                    System.out.print("请输入 (输入quit退出)：");
+                    String input = in.nextLine();
+                    if (input.equals("quit")) {
+                        break;
+                    }
+                    Search.Search(input);
+                    Search.System_Reset();
+                }
+
+            } else {
+                System.out.println("输入错误。");
             }
         }
     }

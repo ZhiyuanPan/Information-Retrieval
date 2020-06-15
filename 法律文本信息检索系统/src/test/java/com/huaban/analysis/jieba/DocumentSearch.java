@@ -6,6 +6,7 @@ public class DocumentSearch {
     public boolean ifGlobalSearch = false;
     public boolean ifFactsSearch = false;
     public boolean ifAccusaationslSearch = false;
+    public HashSet<String> WordsSet = new HashSet<>();
     public JiebaSegmenter segmenter = new JiebaSegmenter();
     public HashMap<Integer, Case> CaseMap = new HashMap<>();
     public HashMap<Integer, String> CaseList = new HashMap<>();
@@ -40,7 +41,6 @@ public class DocumentSearch {
         } else if (ifAccusaationslSearch) {
             getAccusations();
         }
-        getDocuments();
         Construct();
         LengthCaculator();
     }
@@ -66,35 +66,27 @@ public class DocumentSearch {
                 return;
             }
             if (ifGlobalSearch) {
-                GlobalPrint(i, flag);
+                Print(i, flag);
             } else if (ifFactsSearch) {
-                FactsPrint(i, flag);
+                Print(i, flag);
             } else if (ifAccusaationslSearch) {
-                AccusationPrint(i, flag);
+                Print(i, flag);
             }
         }
         System_Reset();
+        System.out.println();
+        Corrector corrector=new Corrector();
+        corrector.InputRecommand(input,WordFrequencyInAll_Reset, WordsSet);
+        System.out.println();
     }
 
-    public void GlobalPrint(int i, int flag) {
+    public void Print(int i, int flag) {
         System.out.println("结果" + (i + 1) + "： 第" + flag + "号文档");
         System.out.println("   犯罪事实：" + CaseMap.get(flag).fact);
         System.out.println("   相关法律条文：" + CaseMap.get(flag).relevant_articles + "   罪名：" + CaseMap.get(flag).accusation
                 + "   罚金：" + CaseMap.get(flag).punish_of_money + "   罪犯：" + CaseMap.get(flag).criminals);
         System.out.println("   死刑：" + CaseMap.get(flag).death_penalty + "   监禁：" + CaseMap.get(flag).imprisonment
                 + "   终身监禁：" + CaseMap.get(flag).life_imprisonment);
-        System.out.println();
-    }
-
-    public void FactsPrint(int i, int flag) {
-        System.out.println("结果" + (i + 1) + "： 第" + flag + "号文档");
-        System.out.println("   犯罪事实：" + CaseMap.get(flag).fact);
-        System.out.println();
-    }
-
-    public void AccusationPrint(int i, int flag) {
-        System.out.println("结果" + (i + 1) + "： 第" + flag + "号文档");
-        System.out.println("   罪名：" + CaseMap.get(flag).accusation);
         System.out.println();
     }
 
@@ -122,7 +114,8 @@ public class DocumentSearch {
     public void StringAdd(String input) {
         double vectorLength = 0;
         CaseList.put(0, input);
-        String[] database = StrProcess(input);
+        Corrector corrector = new Corrector();
+        String[] database = corrector.InputCorrect(input, WordFrequencyInAll_Reset, WordsSet);
         for (String s : database) {
             InputString_terms.add(s);
             if (WordFrequencyInAll.containsKey(s)) {
@@ -181,6 +174,8 @@ public class DocumentSearch {
             String str = CaseList.get(i);
             String[] database = StrProcess(str);
             for (String s : database) {
+                WordsSet.add(s);
+
                 if (WordFrequencyInAll.containsKey(s)) {
                     WordFrequencyInAll.put(s, WordFrequencyInAll.get(s) + 1);
                 } else {
