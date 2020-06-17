@@ -174,8 +174,10 @@ public class DocumentSearch {
             String str = CaseList.get(i);
             String[] database = StrProcess(str);
             for (String s : database) {
-                WordsSet.add(s);
+                WordsSet.add(s);//加入WordsSet
 
+                //如果WordFrequencyInAll以及包含该单词，则将该单词的频率次数加一；
+                // 否则直接将单词加入表中并将出现频率设为1
                 if (WordFrequencyInAll.containsKey(s)) {
                     WordFrequencyInAll.put(s, WordFrequencyInAll.get(s) + 1);
                 } else {
@@ -183,21 +185,24 @@ public class DocumentSearch {
                 }
 
                 if (TF_td.containsKey(i)) {
+                    //如果该单词已经包含在TF_td内且单词以及出现在第i号文档，则将其所在文档编号的出现次数加一；
                     if (TF_td.get(i).containsKey(s)) {
                         TF_td.get(i).put(s, TF_td.get(i).get(s) + 1);
-                    } else {
+                    } else {//如果该单词已经包含在TF_td内但没在第i号文档中出现过，则为其建立新Hashmap并加入；
                         HashMap<String, Integer> t = TF_td.get(i);
                         t.put(s, 1);
                         TF_td.put(i, t);
                     }
-                } else {
+                } else {//如果该单词不包含在TF_td内，为其创建HashMap保存单词字符串并将出现次数设为1加入TF_td中：
                     HashMap<String, Integer> t = new HashMap<>();
                     t.put(s, 1);
                     TF_td.put(i, t);
                 }
+
+                //如果单词在总文档中出现过，将其出现的文档编号加入到已有Set
                 if (DF_t.containsKey(s)) {
                     DF_t.get(s).add(i);
-                } else {
+                } else {//否则建立新Set保存单词与出现的文档编号。
                     HashSet<Integer> t = new HashSet<>();
                     t.add(i);
                     DF_t.put(s, t);

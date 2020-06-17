@@ -14,6 +14,11 @@ public class Accusation_statistics {
     public int NumberOFToken=0;
     public int NumberOFTerm=0;
     public void Statistics(HashMap<Integer, Case> CaseMap, HashSet<String> AccusationSet) {
+        /*建立HashMap Accusation，key对应“罪名”，value对应“罪名”的"fact"，
+        对于每一个文档中的Accusation部分进行统计，将每一个犯罪fact加入到其“罪名”对应的HashSet中。
+        该过程中需要判断得到的accusation是新的“罪名”或是已存在的“罪名”，若为新，加入HashMap中。
+        可以一并统计term和token的数量。
+         */
         HashMap<String, HashSet<String>> Accusation = new HashMap<>();
         for (int i = 1; i <= CaseMap.size(); i++) {
             if (!Accusation.containsKey(CaseMap.get(i).accusation)) {
@@ -27,12 +32,11 @@ public class Accusation_statistics {
             }
         }
 
+        /*对于“罪名”表中的hashset中的“犯罪事实”部分分词，将得到的每一个词，统计频率：*/
         for (String accusation : AccusationSet) {
             HashSet<String> FactsSet = Accusation.get(accusation);
             HashMap<String, Integer> TermMap = new HashMap<>();
-
             Accusation_number.put(accusation, FactsSet.size());
-
             for (String str : FactsSet) {
                 str = segmenter.sentenceProcess(str).toString();//使用结巴分词得到拆分后文档中单词
                 str = str.substring(1, str.length() - 1);//去除结巴分词加入的[]符号
@@ -49,12 +53,14 @@ public class Accusation_statistics {
                     }
                 }
             }
+            //将得到的统计TermMap放到函数biggest10中，获取出现频率最高的10个单词并保存
             String biggest10[] = getBiggest10(TermMap);
             Accusation_data.put(accusation, biggest10);
         }
         print(AccusationSet);
     }
 
+    //遍历Hashmap，获取频率最大的十个单词并返回数组
     public String[] getBiggest10(HashMap TermMap) {
         String[] biggest10 = new String[10];
         List<Map.Entry<String, Integer>> infoIds = new ArrayList<Map.Entry<String, Integer>>(TermMap.entrySet());
@@ -71,6 +77,7 @@ public class Accusation_statistics {
         return biggest10;
     }
 
+    //对每一个罪名得到的十个频率最高的词输出
     public void print(HashSet<String> AccusationSet) {
         System.out.println("以下为对不同“罪名”的犯罪事实部分的内容统计：");
         for (String accusation : AccusationSet) {
