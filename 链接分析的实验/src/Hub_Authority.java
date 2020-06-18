@@ -25,16 +25,17 @@ public class Hub_Authority {
         while (true) {
             System.out.println("Round" + Round + ":");
 
+            //H计算A，归一化A
             Calculate_A();
             vector_A = Vector_Initialize(vector_A);
+            //用A计算H，归一化H
             Calculate_H();
             vector_H = Vector_Initialize(vector_H);
-
+            //最后H和A向量都稳定下来，退出循环并打印信息。
             if (Round >= 2 && cheak(temp_H, vector_H) == 1 && cheak(temp_A, vector_A) == 1) {
                 print();
                 break;
             }
-
             print();
             Round++;
             for (int i = 0; i < temp_A.length; i++) {
@@ -44,28 +45,27 @@ public class Hub_Authority {
         }
     }
 
-    void Calculate_A() {
+    void Calculate_A() {//通过H向量来计算A向量，A向量中的每一个值为H向量的值乘以矩阵中的一列向量。
         for (int i = 0; i < vector_A.length; i++) {
             double sum = 0;
             for (int j = 0; j < vector_H.length; j++) {
-                sum += (vector_H[i] * matrix[i][j]);
-
+                sum += (vector_H[i] * matrix[j][i]);
             }
             vector_A[i] = sum;
         }
     }
 
-    void Calculate_H() {
+    void Calculate_H() {//通过A向量来计算H向量，H向量中的每一个值为A向量的值乘以矩阵中的一列向量。
         for (int i = 0; i < vector_H.length; i++) {
             double sum = 0;
             for (int j = 0; j < matrix.length; j++) {
-                sum += vector_A[i] * matrix[j][i];
+                sum += vector_A[i] * matrix[i][j];
             }
             vector_H[i] = sum;
         }
     }
 
-    double[] Vector_Initialize(double[] a) {
+    double[] Vector_Initialize(double[] a) {//向量归一化
         double sum = 0;
         for (int i = 0; i < a.length; i++) {
             sum += a[i];

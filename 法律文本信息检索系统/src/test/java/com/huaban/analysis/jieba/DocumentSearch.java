@@ -3,9 +3,14 @@ package com.huaban.analysis.jieba;
 import java.util.*;
 
 public class DocumentSearch {
+    //WordSet：所有文档中出现过的每一个单词
+    //WordFrequencyInAll：所有文档中出现过的任意单词、其在所有文档中出现的总次数
+    //TF_td：文档编号、每一个文档中出现过的所有单词、在该文档中出现的次数
+    //DF_t：每一个单词、该单词在所有文档中出现过的文档的编号
+    //建立三个变量ifGlobalSearch，ifFacesSearch，ifAccusationsSearch用于标识全局搜索，按犯罪事实搜索和按罪名搜索。
     public boolean ifGlobalSearch = false;
     public boolean ifFactsSearch = false;
-    public boolean ifAccusaationslSearch = false;
+    public boolean ifAccusaationsSearch = false;
     public HashSet<String> WordsSet = new HashSet<>();
     public JiebaSegmenter segmenter = new JiebaSegmenter();
     public HashMap<Integer, Case> CaseMap = new HashMap<>();
@@ -24,7 +29,7 @@ public class DocumentSearch {
     public void System_Reset() {
         ifGlobalSearch = false;
         ifFactsSearch = false;
-        ifAccusaationslSearch = false;
+        ifAccusaationsSearch = false;
         WordFrequencyInAll = WordFrequencyInAll_Reset;
         TF_td = TF_td_Reset;
         DF_t = DF_t_Reset;
@@ -38,7 +43,7 @@ public class DocumentSearch {
             getDocuments();
         } else if (ifFactsSearch) {
             getFacts();
-        } else if (ifAccusaationslSearch) {
+        } else if (ifAccusaationsSearch) {
             getAccusations();
         }
         Construct();
@@ -60,23 +65,20 @@ public class DocumentSearch {
                 }
             }
             result.put(flag, (double) 0);
+            //当i=0即第一次循环获得的max值就为0时，说明没有返回结果，此时直接结束程序并输出信息
+            if(max==0 && i==0){
+                System.out.println("您输入的查询没有结果，请尝试推荐词条或重新输入。");
+                return;
+            }
             if (max == 0) {
                 System.out.println();
                 System.out.println("----------以上为所有搜索结果----------");
                 return;
             }
-            if (ifGlobalSearch) {
-                Print(i, flag);
-            } else if (ifFactsSearch) {
-                Print(i, flag);
-            } else if (ifAccusaationslSearch) {
-                Print(i, flag);
-            }
+            Print(i, flag);
         }
         System_Reset();
         System.out.println();
-        Corrector corrector=new Corrector();
-        corrector.InputRecommand(input,WordFrequencyInAll_Reset, WordsSet);
         System.out.println();
     }
 
@@ -111,11 +113,12 @@ public class DocumentSearch {
         return CosValue;
     }
 
-    public void StringAdd(String input) {
+    public void StringAdd(String input) {//将输入的搜索文本加入各张表中
         double vectorLength = 0;
         CaseList.put(0, input);
         Corrector corrector = new Corrector();
         String[] database = corrector.InputCorrect(input, WordFrequencyInAll_Reset, WordsSet);
+        corrector.InputRecommand(input, DF_t, WordsSet);
         for (String s : database) {
             InputString_terms.add(s);
             if (WordFrequencyInAll.containsKey(s)) {
@@ -157,13 +160,13 @@ public class DocumentSearch {
             String[] database = StrProcess(S);
             for (String s : database) {
                 double tf_idf = TF_IDF(i, s);
-                vectorLength += (tf_idf * tf_idf);
+                vectorLength += Math.sqrt(tf_idf * tf_idf);
             }
             VectorLength.put(i, Math.sqrt(vectorLength));
         }
     }
 
-    public double TF_IDF(int DocID, String term) {
+    public double TF_IDF(int DocID, String term) {//计算获得特定某个词的TF-IDF值
         double TF = 1 + (Math.log10(TF_td.get(DocID).get(term)));
         double IDF = Math.log10(DocumentSize / (DF_t.get(term).size()));
         return TF * IDF;
@@ -171,11 +174,11 @@ public class DocumentSearch {
 
     public void Construct() {
         for (int i = 1; i <= DocumentSize; i++) {
+            //先获取第i个文档中的文本，分此后对于得到的每一个单词进行加入表的操作
             String str = CaseList.get(i);
             String[] database = StrProcess(str);
             for (String s : database) {
                 WordsSet.add(s);//加入WordsSet
-
                 //如果WordFrequencyInAll以及包含该单词，则将该单词的频率次数加一；
                 // 否则直接将单词加入表中并将出现频率设为1
                 if (WordFrequencyInAll.containsKey(s)) {
@@ -209,7 +212,7 @@ public class DocumentSearch {
                 }
             }
         }
-
+        //结束时，需要将得到的结果保存，用于搜索时重置表时无需重新建表。
         WordFrequencyInAll_Reset = WordFrequencyInAll;
         TF_td_Reset = TF_td;
         DF_t_Reset = DF_t;
@@ -224,19 +227,19 @@ public class DocumentSearch {
         return database;
     }
 
-    public void getDocuments() {
+    public void getDocuments() {//使用全部文本进行建表，最终得到的结果也是犯罪事实中的文本
         for (int i = 1; i <= DocumentSize; i++) {
             CaseList.put(i, CaseMap.get(i).toString());
         }
     }
 
-    public void getFacts() {
+    public void getFacts() {//只使用犯罪事实进行建表，最终得到的结果也是犯罪事实中的文本
         for (int i = 1; i <= DocumentSize; i++) {
             CaseList.put(i, CaseMap.get(i).fact);
         }
     }
 
-    public void getAccusations() {
+    public void getAccusations() {//只使用罪名进行建表，最终得到的结果也是犯罪事实中的文本
         for (int i = 1; i <= DocumentSize; i++) {
             CaseList.put(i, CaseMap.get(i).accusation);
         }

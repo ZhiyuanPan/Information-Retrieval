@@ -68,7 +68,12 @@ public class main {
                     if (input.equals("quit")) {
                         break;
                     }
+                    long start = System.currentTimeMillis();
                     Search.Search(input);
+                    long end = System.currentTimeMillis();
+                    long time_spend = (end - start);
+                    System.out.println("搜索耗时：" + String.format("%.3f", (double)time_spend / 1000) + "s");
+                    System.out.println();
                     Search.System_Reset();
                 }
             } else if (c.equals("2")) {
@@ -82,12 +87,17 @@ public class main {
                     if (input.equals("quit")) {
                         break;
                     }
+                    long start = System.currentTimeMillis();
                     Search.Search(input);
+                    long end = System.currentTimeMillis();
+                    long time_spend = (end - start);
+                    System.out.println("搜索耗时：" + String.format("%.3f", (double)time_spend / 1000) + "s");
+                    System.out.println();
                     Search.System_Reset();
                 }
             } else if (c.equals("3")) {
                 System.out.println("----------数据初始化中----------");
-                Search.ifAccusaationslSearch = true;
+                Search.ifAccusaationsSearch = true;
                 Search.HashMapConstruct(CaseMap);
                 while (true) {
                     Scanner in = new Scanner(System.in);
@@ -96,10 +106,14 @@ public class main {
                     if (input.equals("quit")) {
                         break;
                     }
+                    long start = System.currentTimeMillis();
                     Search.Search(input);
+                    long end = System.currentTimeMillis();
+                    long time_spend = (end - start);
+                    System.out.println("搜索耗时：" + String.format("%.3f", (double)time_spend / 1000) + "s");
+                    System.out.println();
                     Search.System_Reset();
                 }
-
             } else {
                 System.out.println("输入错误。");
             }

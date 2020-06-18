@@ -57,27 +57,49 @@ public class Corrector {
                 continue;
             }
             int MaxFrequency = 0;
+            String change = "";
             for (String str : WordsSet) {
+                if (str.equals("") || str.equals("\"") || str.equals("\u0001") || str.length() <= 1) {
+                    continue;
+                }
+                //不对长度为1的词纠错
+                if (database[i].length() <= 1) {
+                    continue;
+                }
+                //选出频率最高的编辑距离为1的词进行替换。
                 if (Distance(database[i], str) == 1 && WordFrequencyInAll.get(str) > MaxFrequency) {
-                    System.out.print("纠错：" + database[i] + "--->" + str + "   ");
-                    MaxFrequency = WordFrequencyInAll.get(str);
-                    database[i] = str;
+                    change = str;
                 }
             }
+            System.out.print("纠错：" + database[i] + "--->" + change + "   ");
+            database[i] = change;
         }
         System.out.println("");
         return database;
     }
 
-    public void InputRecommand(String input, HashMap<String, Integer> wordFrequencyInAll_Reset, HashSet<String> wordsSet) {
+    public void InputRecommand(String input, HashMap<String, HashSet<Integer>> DF_t, HashSet<String> wordsSet) {
+        //主要使用编辑距离算法与集合取交集的算法。
         String[] database = StrProcess(input);
         for (int i = 0; i < database.length; i++) {
-            if (database[i].length() >= 2 && WordFrequencyInAll.containsKey(database[i])) {
+            if (database[i].length() <= 1) {
                 continue;
             }
             for (String str : WordsSet) {
-                if (Distance(database[i], str) == 1 && WordFrequencyInAll.get(str) >= 5) {
-                    System.out.print("根据：" + database[i] + "为您推荐" + str + "   ");
+                if (str.equals("") || str.equals("\"") || str.equals("\u0001") || str.length() <= 1) {
+                    continue;
+                }
+                if (WordFrequencyInAll.get(str) >= 3 && Distance(database[i], str) <= 3) {
+                //对两个词的出现过的集合取交集，即计算两个词出现在过几个相同的文档。
+                    if (DF_t.containsKey(database[i]) && DF_t.containsKey(str)) {
+                        HashSet t1 = DF_t.get(database[i]);
+                        HashSet t2 = DF_t.get(str);
+                        t1.retainAll(t2);
+                        if (t1.size() < 3) {
+                            continue;
+                        }
+                    }
+                    System.out.print("根据：" + database[i] + "，为您推荐:" + str + "   ");
                 }
             }
         }

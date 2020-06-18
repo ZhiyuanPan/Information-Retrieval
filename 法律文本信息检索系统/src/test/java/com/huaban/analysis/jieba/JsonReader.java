@@ -24,6 +24,7 @@ public class JsonReader {
             FileReader f = new FileReader(Filename);    //使用filereader指定文件
             BufferedReader in = new BufferedReader(f);    //读取文件
             String str;
+            //调用对象中的方法即可得到String类型的JSON数据
             while ((str = in.readLine()) != null) {
                 JSONObject jsonObject = JSON.parseObject(str);
                 String fact = (String) jsonObject.get("fact");
@@ -34,7 +35,7 @@ public class JsonReader {
                 boolean death_penalty = (boolean)jsonObject.getJSONObject("meta").getJSONObject("term_of_imprisonment").get("death_penalty");
                 int imprisonment = (int) jsonObject.getJSONObject("meta").getJSONObject("term_of_imprisonment").get("imprisonment");
                 boolean life_imprisonment = (boolean) jsonObject.getJSONObject("meta").getJSONObject("term_of_imprisonment").get("life_imprisonment");
-
+                //将获取的每一条数据作为数据建立自定义Case类，每一个Case类代表了一条判决文本
                 Case A=new Case(MapSize, fact, relevant_articles, accusation, punish_of_money, criminals, death_penalty, imprisonment, life_imprisonment);
                 Accusation_Set.add(accusation);
                 CaseMap.put(MapSize,A);
