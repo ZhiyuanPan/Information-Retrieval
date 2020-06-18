@@ -4,7 +4,7 @@ public class PageRank {
             {0, 0, 1},
             {0, 1, 0}
     };
-    double[] X = {0.1, 0.1, 0.1};
+    double[] X = {0.33333, 0.33333, 0.33333};
     double Teleprotation_Rate = 0.1;
 
     public void page_rank() {
@@ -88,15 +88,27 @@ public class PageRank {
     }
 
     public double[] XP() {
-        //使用列向量X对矩阵中的每一行进行点乘，得到列中每行元素
+        //使用列向量X对矩阵中的每一列进行点乘，得到每个元素
         for (int i = 0; i < X.length; i++) {
             double sum = 0;
             for (int j = 0; j < matrix.length; j++) {
-                sum += X[i] * matrix[i][j];
+                sum += X[i] * matrix[j][i];
             }
             X[i] = sum;
         }
+        X=Vector_Initialize(X);
         return X;
+    }
+
+    double[] Vector_Initialize(double[] a) {//向量归一化
+        double sum = 0;
+        for (int i = 0; i < a.length; i++) {
+            sum += a[i];
+        }
+        for (int i = 0; i < a.length; i++) {
+            a[i] /= sum;
+        }
+        return a;
     }
 
     public void printX() {
